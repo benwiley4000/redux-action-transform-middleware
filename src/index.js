@@ -44,4 +44,4 @@ const actionTransformMiddleware = (target, transformer) => {
   };
 };
 
-export default actionTransformMiddleware;
+module.exports = actionTransformMiddleware;
