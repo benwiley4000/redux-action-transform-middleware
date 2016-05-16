@@ -1,6 +1,6 @@
 #redux-action-transform-middleware
 
-Generates Redux middleware for applying a given transformer function to a given target key on each dispatched action (if it exists). This key is specified as a string and can be deeply nested (e.g. 'res.data').
+Generates Redux middleware for applying a given transformer function to a given target key on each dispatched action (if it exists). This key is specified as a string and can be deeply nested (e.g. 'req.data').
 
 If the key isn't found, the unmodified action will be passed to the next middleware. If it is found, the transformed action will be passed instead.
 
@@ -29,7 +29,7 @@ const reducer = (state, action) => {
   state = state || {};
   switch(action.type) {
     case 'NAME_CHANGE':
-      const { name, ...rest } = action;
+      const { name, ...rest } = state;
       return {
         name: action.message.name,
         ...rest
