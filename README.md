@@ -29,7 +29,7 @@ const reducer = (state, action) => {
   state = state || {};
   switch(action.type) {
     case 'NAME_CHANGE':
-      const { name, ...rest } = action;
+      const { name, ...rest } = state;
       return {
         name: action.message.name,
         ...rest
