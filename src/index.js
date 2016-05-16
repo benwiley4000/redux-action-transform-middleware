@@ -22,7 +22,7 @@ const targetTransform = (obj, transformer, targetsRemaining) => {
   };
 };
 
-const actionTransformMiddleware = (target, transformer) => {
+const actionTransformMiddleware = (target, transformer, actionTypes) => {
   const errors = [];
   const targetTrail = target.split('.');
   if (
@@ -40,6 +40,9 @@ const actionTransformMiddleware = (target, transformer) => {
   }
 
   return store => next => action => {
+    if (actionTypes && actionTypes.indexOf(action.type) === -1) {
+      return next(action);
+    }
     next(targetTransform(action, transformer, targetTrail));
   };
 };

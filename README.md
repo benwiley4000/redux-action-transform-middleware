@@ -12,6 +12,20 @@ npm install redux-action-transform-middleware
 
 ##Usage
 
+`actionTransformMiddleware` takes three arguments: a target location on the action to be handled, a transformer function, and an **(optional)** list of action types for which this transformer should be applied. If it is left out, the transformer will be applied to all dispatched actions.
+
+```
+const allCapsMiddleware = actionTransformMiddleware(
+  'content',
+  str => str.toUpperCase(),
+  ['TITLE_REQUEST', 'BODY_REQUEST']
+);
+```
+
+The above middleware could be used to convert fetched content to all caps whenever a request is made for title or body content (one would assume, based on the action types).
+
+##Full Example
+
 A very simple yet complete Redux app is shown below, using `actionTransformMiddleware` and a simple transform function to check for an action property called `message.name`, and lowercase it before it is received by the reducer.
 
 ```
