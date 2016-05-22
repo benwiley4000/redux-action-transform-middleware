@@ -54,10 +54,9 @@ const reducer = (state, action) => {
   state = state || {};
   switch(action.type) {
     case 'NAME_CHANGE':
-      const { name, ...rest } = state;
       return {
-        name: action.message.name,
-        ...rest
+        ...state,
+        name: action.message.name
       };
     default:
       return state;
