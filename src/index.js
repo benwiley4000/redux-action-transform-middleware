@@ -22,7 +22,11 @@ const targetTransform = (obj, transformer, targetsRemaining) => {
   };
 };
 
-const actionTransformMiddleware = (target, transformer, actionTypes) => {
+const actionTransformMiddleware = (target, transformer, options) => {
+  options = options || {};
+  allowedActions = options.allowedActions;
+  excludedActions = options.excludedActions;
+
   const errors = [];
   const targetTrail = target.split('.');
   if (
@@ -34,13 +38,25 @@ const actionTransformMiddleware = (target, transformer, actionTypes) => {
   if (typeof transformer !== 'function') {
     errors.push('Supplied transformer is not a function.');
   }
+  if (allowedActions && !isArray(allowedActions)) {                           
+    errors.push('Specified `allowedActions` parameter is not an array.');
+  }
+  if (excludedActions && !isArray(excludedActions)) {                           
+    errors.push('Specified `excludedActions` parameter is not an array.');
+  }
   if (errors.length) {
     errors.forEach(console.error.bind(console));
     throw new Error('Unable to create action transform middleware.');
   }
 
   return store => next => action => {
-    if (actionTypes && actionTypes.indexOf(action.type) === -1) {
+    if (allowedActions && allowedActions.indexOf(action.type) === -1) {
+      return next(action);
+    }
+    if (excludedActions && excludedActions.indexOf(action.type) !== -1) {
+      if (allowedActions) {
+        console.warn('Excluding action ' + action.type + ' from transform middleware, though it was specified both as excluded and allowed. Please fix conflict.');
+      }
       return next(action);
     }
     next(targetTransform(action, transformer, targetTrail));

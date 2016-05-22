@@ -1,6 +1,6 @@
 #redux-action-transform-middleware
 
-Generates Redux middleware for applying a given transformer function to a given target key on each dispatched action (if it exists). This key is specified as a string and can be deeply nested (e.g. 'req.data').
+Generates Redux middleware for applying a given transformer function to a given sub-object target on each dispatched action (if it exists). This target's key is specified as a string and can be deeply nested (e.g. 'req.data').
 
 If the key isn't found, the unmodified action will be passed to the next middleware. If it is found, the transformed action will be passed instead.
 
@@ -12,13 +12,24 @@ npm install redux-action-transform-middleware
 
 ##Usage
 
-`actionTransformMiddleware` takes three arguments: a target location on the action to be handled, a transformer function, and an **(optional)** list of action types for which this transformer should be applied. If it is left out, the transformer will be applied to all dispatched actions.
+```
+actionTransformMiddleware(target, transformer [, options])
+```
 
+`target` is the key location of the sub-object to transform.
+
+`transformer` is the function to be applied to the target.
+
+`options.allowedActions` is a list of Redux action types that, if specified, will cause all other action types to be ignored by the middleware. If not specified, all dispatched actions will be transformed by default.
+
+`options.excludedActions` is a list of Redux action types that will be explicitly filtered by the middleware. If an action type has also been specified in `allowedActions`, it will be excluded but a warning will also be printed to the console.
+
+e.g.
 ```
 const allCapsMiddleware = actionTransformMiddleware(
   'content',
   str => str.toUpperCase(),
-  ['TITLE_REQUEST', 'BODY_REQUEST']
+  { allowedActions: ['TITLE_REQUEST', 'BODY_REQUEST'] }
 );
 ```
 
