@@ -24,8 +24,8 @@ const targetTransform = (obj, transformer, targetsRemaining) => {
 
 const actionTransformMiddleware = (target, transformer, options) => {
   options = options || {};
-  allowedActions = options.allowedActions;
-  excludedActions = options.excludedActions;
+  const allowedActions = options.allowedActions;
+  const excludedActions = options.excludedActions;
 
   const errors = [];
   const targetTrail = target.split('.');
