@@ -1,6 +1,6 @@
 {
   "name": "redux-action-transform-middleware",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Apply a transformation to a specified target on a Redux action, if that target exists.",
   "main": "dist/index.js",
   "scripts": {
@@ -24,5 +24,13 @@
     "babel-preset-stage-0": "^6.5.0",
     "var-validator": "0.0.3",
     "webpack": "^1.13.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benwiley4000/redux-action-transform-middleware.git"
+  },
+  "bugs": {
+    "url": "https://github.com/benwiley4000/redux-action-transform-middleware/issues"
+  },
+  "homepage": "https://github.com/benwiley4000/redux-action-transform-middleware#readme"
 }
