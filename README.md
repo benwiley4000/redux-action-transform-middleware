@@ -1,6 +1,6 @@
 #redux-action-transform-middleware
 
-Generates Redux middleware for applying a given transformer function to a given sub-object target on each dispatched action (if it exists). This target's key is specified as a string and can be deeply nested (e.g. 'req.data').
+Generates Redux middleware for applying a given transformer function to a given sub-object target on each dispatched action (if it exists). This target's key is specified as a string and can be deeply nested (e.g. 'res.data').
 
 If the key isn't found, the unmodified action will be passed to the next middleware. If it is found, the transformed action will be passed instead.
 
