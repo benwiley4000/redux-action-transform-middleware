@@ -13,7 +13,7 @@ const actionTransformMiddleware = (target, transformer, options) => {
   const targetTrail = getTargetTrail(target);
   if (
     targetTrail.indexOf('') !== -1 ||
-    targetTrail.some(varName => !varVal.isValid(varName))
+    targetTrail.some(varName => !varVal.isValid(varName) && varName !== parseInt(varName))
   ) {
     errors.push('Invalid target location specified.');
   }
