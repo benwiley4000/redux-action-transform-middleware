@@ -1,26 +1,8 @@
 import varVal from 'var-validator';
 
-const targetTransform = (obj, transformer, targetsRemaining) => {
-  if (targetsRemaining.length === 0) {
-    return transformer(obj);
-  }
-  const nextTarget = targetsRemaining[0];
-  const {
-    [nextTarget]: nextObj,
-    ...rest
-  } = obj;
-  if (!nextObj) {
-    return obj;
-  }
-  return {
-    [nextTarget]: targetTransform(
-      nextObj,
-      transformer,
-      targetsRemaining.slice(1)
-    ),
-    ...rest
-  };
-};
+import getTargetTrail from './getTargetTrail';
+import targetTransform from './targetTransform';
+import isArray from './isArray';
 
 const actionTransformMiddleware = (target, transformer, options) => {
   options = options || {};
@@ -28,7 +10,7 @@ const actionTransformMiddleware = (target, transformer, options) => {
   const excludedActions = options.excludedActions;
 
   const errors = [];
-  const targetTrail = target.split('.');
+  const targetTrail = getTargetTrail(target);
   if (
     targetTrail.indexOf('') !== -1 ||
     targetTrail.some(varName => !varVal.isValid(varName))
