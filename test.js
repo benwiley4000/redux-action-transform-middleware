@@ -164,7 +164,7 @@ test('targetTransform works for array indices together with object properties.',
   t.deepEqual(transformed, desired);
 });
 
-test('targetTransform creates a new object.', t => {
+test('targetTransform creates a new object if the target is found.', t => {
   t.plan(1);
 
   const obj = {
@@ -180,6 +180,24 @@ test('targetTransform creates a new object.', t => {
   const transformed = targetTransform(obj, upperCaseKeys, ['a', 'b']);
 
   t.notEqual(obj, transformed);
+});
+
+test('targetTransform returns the same object if the target is not found.', t => {
+  t.plan(1);
+
+  const obj = {
+    a: {
+      b: {
+        c: {
+          d: 7
+        }
+      }
+    }
+  };
+
+  const transformed = targetTransform(obj, upperCaseKeys, ['a', 'b', 'c', 'd', 'e']);
+
+  t.equal(obj, transformed);
 });
 
 test('Middleware transforms specified target on dispatched actions.', t => {
