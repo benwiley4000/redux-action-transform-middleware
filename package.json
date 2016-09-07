@@ -1,6 +1,6 @@
 {
   "name": "redux-action-transform-middleware",
-  "version": "0.4.3",
+  "version": "0.5.0",
   "description": "Apply a transformation to a specified target on a Redux action, if that target exists.",
   "main": "dist/index.js",
   "scripts": {
