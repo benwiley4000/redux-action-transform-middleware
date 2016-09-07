@@ -87,3 +87,7 @@ store.dispatch({
 console.log(store.getState()); // { name: 'amanda' }
 
 ```
+
+##Notation
+
+Nested targets can be specified using pure dot notation (e.g. `a.b.c`) or with square bracket notation (`a[0][1]['something']`) or any combination (`a.b[0].something`). For simplicity's sake, only strings and integers are supported as property names/indices in square bracket notation. This should cover 99.9% of use cases.
