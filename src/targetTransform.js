@@ -9,13 +9,17 @@ const targetTransform = (obj, transformer, targetsRemaining) => {
   if (!nextObj) {
     return obj;
   }
-  const reformedObject = isArray(obj) ? [...obj] : { ...obj };
-  reformedObject[nextTarget] = targetTransform(
+  const newNextObj = targetTransform(
     nextObj,
     transformer,
     targetsRemaining.slice(1)
   );
-  return reformedObject;
+  if (nextObj === newNextObj) {
+    return obj;
+  }
+  const newObj = isArray(obj) ? [...obj] : { ...obj };
+  newObj[nextTarget] = newNextObj;
+  return newObj;
 };
 
 export default targetTransform;
