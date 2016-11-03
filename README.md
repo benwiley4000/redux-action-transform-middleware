@@ -4,7 +4,9 @@ Generates Redux middleware for applying a given transformer function to a given 
 
 If the key isn't found, the unmodified action will be passed to the next middleware. If it is found, the transformed action will be passed instead.
 
-##Installation (get it from [npm](https://www.npmjs.com/package/redux-action-transform-middleware))
+[![NPM](https://nodei.co/npm/redux-action-transform-middleware.png)](https://npmjs.org/package/redux-action-transform-middleware)
+
+##Installation
 
 ```
 npm install redux-action-transform-middleware
