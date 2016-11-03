@@ -12,7 +12,7 @@ npm install redux-action-transform-middleware
 
 ##Usage
 
-```
+```javascript
 actionTransformMiddleware(target, transformer [, options])
 ```
 
@@ -25,7 +25,7 @@ actionTransformMiddleware(target, transformer [, options])
 `options.excludedActions` is a list of Redux action types that will be explicitly filtered by the middleware. If an action type has also been specified in `allowedActions`, it will be excluded but a warning will also be printed to the console.
 
 e.g.
-```
+```javascript
 const allCapsMiddleware = actionTransformMiddleware(
   'content',
   str => str.toUpperCase(),
@@ -39,7 +39,7 @@ The above middleware could be used to convert fetched content to all caps whenev
 
 A very simple yet complete Redux app is shown below, using `actionTransformMiddleware` and a simple transform function to check for an action property called `message.name`, and lowercase it before it is received by the reducer.
 
-```
+```javascript
 /**
  * ES6/ES2015 syntax
  */
